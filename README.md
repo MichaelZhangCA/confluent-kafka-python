@@ -16,7 +16,7 @@ I cloned from https://github.com/confluentinc/confluent-kafka-python, as of May 
 #### librdkafka-0.11.4
 I cloned from https://github.com/edenhill/librdkafka, I pick the same verion as Confluent's package, v 0.11.4. PS: The librdkafka repo on Confluent is not up-to-date, some functions are not missing in the repo.
 #### librdkafka-reference
-A simply re-org folder include necessary header/c files for compiling, a release folder with pre-compiled dll/lib files.
+A simply re-org folder include necessary header/c files for compiling, and a release folder with pre-compiled dll/lib files. You will alwasy need this for runtime anyway. 
 
 ## Prepare for installation
 
@@ -24,5 +24,15 @@ Clone this repo to your C driver. It's highly recommended to cloen to the folder
 
 Download & install VC++ 2013 redistribution package, you can download from Microsoft @ https://www.microsoft.com/en-us/download/details.aspx?id=40784
 
-Optional, if you want build by youself, plase download and install OpenSSL package from https://slproweb.com/products/Win32OpenSSL.html. Again, it's a pre-compiled package, and I won't recommend you compile OpenSSL by yourself, it will require more source codes to be downloaded to your local disk.... You can download both 32 & 64-bit but not the latest version. Version v 1.0.2 works, not the latest one.
+Optional, if you want to build by youself, plase download and install OpenSSL package from https://slproweb.com/products/Win32OpenSSL.html. Again, it's a pre-compiled package, and I won't recommend you to compile OpenSSL by yourself, it will require more source codes to be downloaded to your local disk.... You can download both 32 & 64-bit but not the latest version. Version v 1.0.2 works, not the latest one.
+
+### Set up system variables
+
+Please set up the following 3 system variables before installing/compiling. If you clone this repo to a different location on your local driver, please change the value of variable accordingly.
+
+INCLUDE=C:\confluent-kafka-python\librdkafka-reference
+LIB=C:\confluent-kafka-python\librdkafka-reference\release
+PATH=C:\confluent-kafka-python\librdkafka-reference\release
+
+
 
