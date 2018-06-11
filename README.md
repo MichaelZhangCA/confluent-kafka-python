@@ -20,7 +20,7 @@ A simply re-org folder include necessary header/c files for compiling, and a rel
 
 #### what I changed
 1, remove item from ignore file so I could upload the build folder under C:\confluent-kafka-python\confluent-kafka-python-0.11.4<br>
-2, changed setup.py file to make sure it can find the correct dll file, from "libraries=['rdkafka']" to "libraries=['librdkafka']". Not sure it's a bug/typo, or the difference between Linux and Windows.
+2, changed setup.py file to make sure it can find the correct dll file, from "libraries=['rdkafka']" to "libraries=['librdkafka']". Not sure it's a bug/typo from Confluent, or the difference between Linux and Windows.
 
 
 ## Prepare for installation
