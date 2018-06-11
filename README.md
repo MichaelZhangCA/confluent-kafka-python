@@ -18,6 +18,11 @@ I cloned from https://github.com/edenhill/librdkafka, I pick the same verion as 
 #### librdkafka-reference
 A simply re-org folder include necessary header/c files for compiling, and a release folder with pre-compiled dll/lib files. You will alwasy need this for runtime anyway. 
 
+#### what I changed
+1, remove item from ignore file so I could upload the build folder under C:\confluent-kafka-python\confluent-kafka-python-0.11.4<br>
+2, changed setup.py file to make sure it can find the correct dll file, from "libraries=['rdkafka']" to "libraries=['librdkafka']". Not sure it's a bug/typo, or the difference between Linux and Windows.
+
+
 ## Prepare for installation
 
 Clone this repo to your C driver. It's highly recommended to cloen to the folder c:\confluent-kafka-python, it will make the rest of this document much easier.
