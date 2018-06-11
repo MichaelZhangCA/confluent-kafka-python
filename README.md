@@ -46,6 +46,32 @@ It'll be very quick, since it simply install the pre-compiled pyd file.
 
 ### Test package
 
+cd c:\ ( or any other folder which is NOT the Kafka installation folder )
+python
+>>> import confluent_kafka
+>>> (should get nothing here, enjoy!!! )
 
+If you get "missing dll" error when importing the package, the possible reason might be:
+1, VC++ 2013 distribution package was not installed properly.
+2, the release folder is not added to PATH variable
+
+### DIY the build
+
+If you want to build the pacakge by yourself, please following the steps below.
+1, delete the build folder from C:\confluent-kafka-python\confluent-kafka-python-0.11.4
+2, run "python setup.py install" will build the Python pacakge first
+
+if you want to build librdkafka dll, following the steps below.
+1, install VS2013
+2, install OpenSSL @ C:\OpenSSL-Win64
+3, open the solution under C:\confluent-kafka-python\librdkafka-0.11.4\win32
+4, change the build to X64 platform and release version
+5, build the project
+6, copy the dll from C:\confluent-kafka-python\librdkafka-0.11.4\win32\outdir\v120\x64\Release to C:\confluent-kafka-python\librdkafka-reference\release
+7, repeat the previous step to install Python pacakge
+
+Let me know if you have any difficulty from building librdkafka project, I'm glad to help. 
+
+:p
 
 
