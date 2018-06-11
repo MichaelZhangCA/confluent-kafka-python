@@ -61,14 +61,14 @@ If you want to build the pacakge by yourself, please following the steps below.
 1, delete the build folder from C:\confluent-kafka-python\confluent-kafka-python-0.11.4
 2, run "python setup.py install" will build the Python pacakge first
 
-if you want to build librdkafka dll, following the steps below.
-1, install VS2013
-2, install OpenSSL @ C:\OpenSSL-Win64
-3, open the solution under C:\confluent-kafka-python\librdkafka-0.11.4\win32
-4, change the build to X64 platform and release version
-5, build the project
-6, copy the dll from C:\confluent-kafka-python\librdkafka-0.11.4\win32\outdir\v120\x64\Release to C:\confluent-kafka-python\librdkafka-reference\release
-7, repeat the previous step to install Python pacakge
+if you want to build librdkafka dll, following the steps below.<br>
+1, install VS2013<br>
+2, install OpenSSL @ C:\OpenSSL-Win64<br>
+3, open the solution under C:\confluent-kafka-python\librdkafka-0.11.4\win32<br>
+4, change the build to X64 platform and release version<br>
+5, build the project<br>
+6, copy the dll from C:\confluent-kafka-python\librdkafka-0.11.4\win32\outdir\v120\x64\Release to C:\confluent-kafka-python\librdkafka-reference\release<br>
+7, repeat the previous step to install Python pacakge<br>
 
 Let me know if you have any difficulty from building librdkafka project, I'm glad to help. 
 
