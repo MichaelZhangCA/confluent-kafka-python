@@ -46,10 +46,10 @@ It'll be very quick, since it simply install the pre-compiled pyd file.
 
 ### Test package
 
-cd c:\ ( or any other folder which is NOT the Kafka installation folder )
-python
-) import confluent_kafka
-) (should get nothing here, enjoy!!! )
+#### cd c:\ ( or any other folder which is NOT the Kafka installation folder )
+#### python
+#### ) import confluent_kafka
+#### ) (should get nothing here, enjoy!!! )
 
 If you get "missing dll" error when importing the package, the possible reason might be:
 1, VC++ 2013 distribution package was not installed properly.
