@@ -31,8 +31,21 @@ Optional, if you want to build by youself, plase download and install OpenSSL pa
 Please set up the following 3 system variables before installing/compiling. If you clone this repo to a different location on your local driver, please change the value of variable accordingly.
 
 INCLUDE=C:\confluent-kafka-python\librdkafka-reference
+
 LIB=C:\confluent-kafka-python\librdkafka-reference\release
+
 PATH=C:\confluent-kafka-python\librdkafka-reference\release
+
+### Install Python pacakge
+
+#### start a new command windows after setting up the system variables above
+#### cd C:\confluent-kafka-python\confluent-kafka-python-0.11.4
+#### python setup.py install
+
+It'll be very quick, since it simply install the pre-compiled pyd file.
+
+### Test package
+
 
 
 
