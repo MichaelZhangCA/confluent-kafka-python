@@ -31,10 +31,10 @@ Optional, if you want to build by youself, plase download and install OpenSSL pa
 Please set up the following 3 system variables before installing/compiling. If you clone this repo to a different location on your local driver, please change the value of variable accordingly.
 
 INCLUDE=C:\confluent-kafka-python\librdkafka-reference
-
 LIB=C:\confluent-kafka-python\librdkafka-reference\release
-
 PATH=C:\confluent-kafka-python\librdkafka-reference\release
+
+* add to the current PATH varible
 
 ### Install Python pacakge
 
