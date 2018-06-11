@@ -1,0 +1,64 @@
+matrix:
+ include:
+  # Source package verification with Python 2.7 and librdkafka master
+  - os: linux
+    language: python
+    dist: trusty
+    python: "2.7"
+    env: LD_LIBRARY_PATH="$PWD/tmp-build/lib" LIBRDKAFKA_VERSION=master
+  # Source package verification with Python 2.7 and librdkafka v0.9.5
+  - os: linux
+    language: python
+    dist: trusty
+    python: "2.7"
+    env: LD_LIBRARY_PATH="$PWD/tmp-build/lib" LIBRDKAFKA_VERSION=v0.9.5
+  # Source package verification with Python 3.5 and librdkafka master
+  - os: linux
+    language: python
+    dist: trusty
+    python: "3.5"
+    env: LD_LIBRARY_PATH="$PWD/tmp-build/lib" LIBRDKAFKA_VERSION=v0.9.5
+  # cibuildwheel for osx
+  - os: osx
+    env: CIBW_BEFORE_BUILD="tools/bootstrap-librdkafka.sh --require-ssl master tmp" CFLAGS="-Itmp/include" LDFLAGS="-Ltmp/lib"
+  # cibuildwheel for manylinux
+  - os: linux
+    dist: trusty
+    sudo: required
+    env: CIBW_BEFORE_BUILD="tools/prepare-cibuildwheel-linux.sh master"
+    language: python
+    python: "2.7"
+    services: docker
+
+install:
+ - if [[ $TRAVIS_OS_NAME == "osx" ]]; then python -m ensurepip && virtualenv /tmp/venv && source /tmp/venv/bin/activate ; fi
+ - pip install -U pip
+ - if [[ -z $CIBW_BEFORE_BUILD ]]; then pip install pytest-timeout flake8 ; fi
+ - if [[ -z $CIBW_BEFORE_BUILD ]]; then rm -rf tmp-build ; tools/bootstrap-librdkafka.sh --require-ssl ${LIBRDKAFKA_VERSION} tmp-build ; fi
+ - if [[ -n $TRAVIS_TAG && -n $CIBW_BEFORE_BUILD ]]; then pip install cibuildwheel==0.4.1 ; fi
+
+
+script:
+ - if [[ -z $CIBW_BEFORE_BUILD ]]; then pip install -v --global-option=build_ext --global-option="-Itmp-build/include/" --global-option="-Ltmp-build/lib" . .[avro] ; fi
+ - if [[ -z $CIBW_BEFORE_BUILD ]]; then flake8 ; fi
+ - if [[ -z $CIBW_BEFORE_BUILD ]]; then py.test -v --timeout 20 --ignore=tmp-build --import-mode append ; fi
+ - if [[ -n $TRAVIS_TAG && -n $CIBW_BEFORE_BUILD ]]; then cibuildwheel --output-dir wheelhouse ; ls -la wheelhouse/ ; fi
+ - if [[ -n $TRAVIS_TAG && $TRAVIS_OS_NAME == linux && -n $CIBW_BEFORE_BUILD ]]; then tools/test-manylinux.sh ; fi
+
+
+deploy:
+ provider: s3
+ access_key_id:
+  secure: "T0hDlPMFjEliYnd9WjoKAvine5X7zLRLYzH5e2enzog747AveJJGU+I8Plgf+kfMj0hhin0tUWvuvfqEaRV5suSOLuO37Q+bmJRLHPf0ktpTZijXIVXGCw2X34LPyeOqv1XxbtJMD1p7FHEif9wHvUs3pwdBWE/iAwZTUr5B+pCTM02LrrskH1MA83rR/h98+ZK2G2yW+vJttRPIE4GDhG4ekOqkmho3fU2n7uCkEdnboGT/Kq5HkUcEyC9AjpnlLYzcJmgOPDNOKDMwb2pFjkRg1MfXcvaBoQT5bSSQyaS1WIqP9VfDi6oTl1vxuvg1AVLcXvZy9FzWFMjmghDxI/TLVAz0Tnh7RKL6WKqwFxyMRBJhxn81UkkG6c1kOlGDBABEySgAwKG01MkkwbPTaGU0mizxyvqj5JQNxZiS6vn0ZQHb3Y1YVeShdwkg2kb+G8MLKTAs9KYPQPdA5n91/g44BTTlMmy1JKNuBPfagrxyWdz9rDNG1l48HDnmSsERws8grJQh2kCCtON25GU7emtkjsBdfgZuZeVxKPdoW6CT5TUlh4Lo148Mm0OGIKgxsbQLJfRx3MGSBcCOYgYp0zdUDO5UKbli7Mv8A4kEgwXpGZGon20b5DD2O0e/DJWh9APnR/cfUN97OYqukmbk5SG9vt17MAtiVVDwj6UbrNE="
+ secret_access_key:
+  secure: "imC8TwsarAxKhS7yMPNCwbvIhHmDhZB/NfWDLUToySP8ZQDWQMdlpiRlEA4RlNP8KOBGBShCX7dMXTC9nGFnbLhDKnpkZaQ3RIkXthjbcmsXiTAWNndVkCrgxDPpFwMHEs1Eu00AgJrELzDlKfhRls1txQO2N5wvVZFa1zyzlm46q4guesVakPVl3bZhx0gImYsJohXNVjvD3cks7+c6hFPDdMIEchgG+0amgCNNdK8ewZGfMMim5nvuHH00h8oJsIxQKOEzgz+JXwCi7hgd5UYn6DRFNyjmIK4iMphjC4pdKKp7r+m6Yj/s/Kc/YMVmRo3Zce4mM66KvmLSnnGGiewGRIkjyZ9UcvbrwkfudSMdPmWjnn0MKs7Vnfaej0xBZ9WN5c1QB6JzsLxStNp7gULfaZyqb7+zNtvYvbHYrFa80/RBpMbSBg6GSslsFmqEtsS9WInzTQYfNeSzrq5QU11ZKdsoQ53kruAtSxDJXFe1TKMSMnH/QWqvjwdrDoaJJZkJuMgNkznKuxorf7syF+mr9O63UKs72fHhEWBNOPfE+pwVlHUuBSE95jr5gu1Nxyyy5GV/sU+x/ik5a5Uytq9pcxhn4v3614VlG6t3Wy29BDDO54Sng0n12XXL2UaTYT6aIPTU1N8XQe66YjVvi7ms8Yt6HCA5+MMJdaSnkoI="
+ bucket: librdkafka-ci-packages
+ region: us-west-1
+ local-dir: wheelhouse
+ upload-dir: confluent-kafka-python/p-confluent-kafka-python__bld-travis__plat-${TRAVIS_OS_NAME}__tag-${TRAVIS_TAG}__sha-${TRAVIS_COMMIT}__bid-${TRAVIS_BUILD_ID}__
+ acl: public_read
+ skip_cleanup: true
+ on:
+  repo: confluentinc/confluent-kafka-python
+  tags: true
+  condition: "-n $CIBW_BEFORE_BUILD"
