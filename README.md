@@ -63,9 +63,9 @@ It'll be very quick, since it simply install the pre-compiled pyd file.
 #### => import confluent_kafka
 #### => (should get nothing here, enjoy!!! )
 
-If you get "missing dll" error when importing the package, the possible reason might be:
-1, VC++ 2013 distribution package was not installed properly.
-2, the release folder is not added to PATH variable
+If you get "missing dll" error when importing the package, the possible reason might be:<br>
+1, VC++ 2013 distribution package was not installed properly.<br>
+2, the release folder is not added to PATH variable<br>
 
 ## DIY the build
 
