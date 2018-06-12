@@ -46,7 +46,7 @@ Please set up the following 3 system variables before installing/compiling. If y
 #### LIB=C:\confluent-kafka-python\librdkafka-reference\release
 #### PATH=C:\confluent-kafka-python\librdkafka-reference\release
 
-* add to the current PATH varible
+* if you won't build by yourself, probably you don't need INCLUDE & LIB been set. Add to the current PATH varible is required for runtime.
 
 ## Install Python pacakge
 
