@@ -3,7 +3,7 @@
 
 As of June 11, 2018, the day I create this repository, Confluent was not offically support Python package on Windows yet. I spent some time and managed to make the Python package working on Windows platform. In this case I could keep my development environment on Windows computer, which makes my life much easier.
 
-If you fought the same problem like me, you probably will be  I'll try explain the details so you could actullay do it by yourself, if you don't feel confortable to install the pre-compiled dll / bin file on your system.
+If you fought the same problem like me, you probably will be able to find something helpful. I'll try explain the details so you could actullay do it by yourself, if you don't feel confortable to install the pre-compiled dll / bin file on your system.
 
 ## Compatibility
 
