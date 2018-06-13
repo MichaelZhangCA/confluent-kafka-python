@@ -14,7 +14,7 @@ I only work on Python 3.6 X64 version, so you might need do your compiling if yo
 #### confluent-kafka-python-0.11.4
 I cloned from https://github.com/confluentinc/confluent-kafka-python, as of May 31, 2018, v 0.11.4 is the latest release
 #### librdkafka-0.11.4
-I cloned from https://github.com/edenhill/librdkafka, I pick the same verion as Confluent's package, v 0.11.4. PS: The librdkafka repo on Confluent is not up-to-date, some functions are not missing in the repo.
+I cloned from https://github.com/edenhill/librdkafka, I pick the same verion as Confluent's package, v 0.11.4. PS: The librdkafka repo on Confluent is not up-to-date, some functions are missing in the repo.
 #### librdkafka-reference
 A simply re-org folder include necessary header/c files for compiling, and a release folder with pre-compiled dll/lib files. You will alwasy need this for runtime anyway. 
 
