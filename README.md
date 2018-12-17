@@ -1,3 +1,9 @@
+### **** Confluent released experimental binary wheel distributions for Windows  in version 0.11.6 ***
+I upgraded successfully by runnig follow command:
+python -m pip install confluent-kafka --upgrade
+
+
+
 # confluent-kafka-python
 ### **** keep your Confluent Kafka Python development on Windows ****
 
